@@ -82,3 +82,14 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# Sidebar indicando troca de páginas
+with st.sidebar:
+    st.header("Menu")
+    if st.button("Página Inicial"):
+        st.switch_page("main_page.py")
+    st.header("Assistentes")
+    if st.button("Assistente 1"):
+        st.switch_page("pages/page1.py")
+    if st.button("Assistente 2"):
+        st.switch_page("pages/page2.py")
