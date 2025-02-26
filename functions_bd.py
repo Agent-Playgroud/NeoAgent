@@ -8,6 +8,8 @@ try:
         "Driver={SQL Server};"
         "Server=MAQ-RR;"
         "Database=Agente_IA;"
+        "Trusted_Connection=yes;"
+        "Connection Timeout=120;"
     )
 
     conexao = pyodbc.connect(dados_conexao)
@@ -22,7 +24,7 @@ except Exception as e:
 #funções para o banco de dados do usuario
 
 class dados_user:
-    def __init__(self, nome, sobrenome, email, senha):
+    def __init__(self, nome, sobrenome, email, senha=None):
         self.nome = nome
         self.sobrenome = sobrenome
         self.email = email
@@ -66,7 +68,7 @@ class dados_agent:
         self.tema = tema
 
     def cadastrar_agente(self):
-        comando = f"""INSERT INTO DimAgent(nome_agente, tema_agente)
+        comando = f"""INSERT INTO DimAgent(key_agent,nome_agente, tema_agente)
                   VALUES ('{self.nome}', '{self.tema}')"""
         cursor.execute(comando)
         cursor.commit()
@@ -95,3 +97,14 @@ def atualizar_agente(nome, tema):
     comando = f"""UPDATE DimAgent SET tema_agente = '{tema}' WHERE nome_agente = '{nome}'"""
     cursor.execute(comando)
     cursor.commit()    
+
+
+#funções para o banco de dados dos arquivos
+
+def inserir_arquivo(id_agente,nome_arquivo,id_user):
+    comando = f"""INSERT INTO DimAgent(key_agente,file_source, id_user)
+                VALUES ('{id_agente}', '{nome_arquivo}', '{id_user}')"""
+    cursor.execute(comando)
+    cursor.commit()
+    
+    
