@@ -22,7 +22,7 @@ except Exception as e:
 #funções para o banco de dados do usuario
 
 class dados_user:
-    def __init__(self, nome, sobrenome, email, senha):
+    def __init__(self, nome, sobrenome, email, senha=None):
         self.nome = nome
         self.sobrenome = sobrenome
         self.email = email

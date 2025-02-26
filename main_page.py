@@ -4,6 +4,7 @@ from google_auth_oauthlib.flow import Flow
 from google.oauth2.credentials import Credentials
 import json
 import os
+import functions_bd
 
 # Configurações do Google OAuth
 SCOPES = ["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"]
@@ -74,11 +75,19 @@ def main():
         if user_info:
             st.write("Bem-vindo(a),", user_info["name"])
             st.write("E-mail:", user_info["email"])
+            #verifica se o usuario esta cadastrado no banco de dados
+            if functions_bd.localizar_usuario(user_info["email"]) == []:
+                user1 = functions_bd.dados_user(user_info["given_name"], user_info["family_name"], user_info["email"])
+                user1.cadastrar_usuario()
+            else:
+                pass
             if st.button("Logout"):
                 st.session_state["credentials"] = None
                 st.rerun()
         else:
             st.error("Erro ao obter informações do usuário.")
+
+
 
 if __name__ == "__main__":
     main()
@@ -93,3 +102,4 @@ with st.sidebar:
         st.switch_page("pages/page1.py")
     if st.button("Assistente 2"):
         st.switch_page("pages/page2.py")
+
