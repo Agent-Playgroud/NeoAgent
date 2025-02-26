@@ -75,10 +75,15 @@ def main():
         if user_info:
             st.write("Bem-vindo(a),", user_info["name"])
             st.write("E-mail:", user_info["email"])
+
             #verifica se o usuario esta cadastrado no banco de dados
             if functions_bd.localizar_usuario(user_info["email"]) == []:
-                user1 = functions_bd.dados_user(user_info["given_name"], user_info["family_name"], user_info["email"])
-                user1.cadastrar_usuario()
+                try:
+                    user1 = functions_bd.dados_user(user_info["given_name"], user_info["family_name"], user_info["email"])
+                    user1.cadastrar_usuario()
+                except:
+                    user1 = functions_bd.dados_user(user_info["given_name"],'NaN', user_info["email"])
+                    user1.cadastrar_usuario()
             else:
                 pass
             if st.button("Logout"):
@@ -86,7 +91,6 @@ def main():
                 st.rerun()
         else:
             st.error("Erro ao obter informações do usuário.")
-
 
 
 if __name__ == "__main__":

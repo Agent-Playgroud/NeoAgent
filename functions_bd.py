@@ -8,6 +8,8 @@ try:
         "Driver={SQL Server};"
         "Server=MAQ-RR;"
         "Database=Agente_IA;"
+        "Trusted_Connection=yes;"
+        "Connection Timeout=60;"
     )
 
     conexao = pyodbc.connect(dados_conexao)
