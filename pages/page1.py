@@ -3,6 +3,7 @@ import openai
 import os
 from dotenv import load_dotenv
 from openai_agent import chat_with_openai
+import time
 
 # Carregar variáveis do arquivo .env
 load_dotenv()
@@ -10,14 +11,11 @@ load_dotenv()
 # Configurar a API Key
 api_key = os.getenv("OPENAI_API_KEY")
 
-# Função wrapper (opcional, para tratamento de erros) para chamar a função com o histórico
+# Função wrapper para chamar a função com o histórico
 def get_chatgpt_response(prompt, conversation_history):
     try:
-        response = chat_with_openai(prompt, conversation_history)  # Chama sua função diretamente, passando também o histórico
-# Se a função retorna uma tupla (resposta, histórico), pega só a resposta
-        if isinstance(response, tuple):
-            return response[0]  # Assume que o primeiro elemento é a resposta
-        return response  # Caso contrário, retorna diretamente
+        response, updated_history = chat_with_openai(prompt, conversation_history)
+        return response
     except Exception as e:
         return f"Erro ao chamar o ChatGPT: {str(e)}"
 
@@ -25,17 +23,42 @@ def get_chatgpt_response(prompt, conversation_history):
 def main():
     st.title("Chat com Assistente 1")
 
+    # Inicializa o estado para controlar a mensagem temporária
+    if "show_api_message" not in st.session_state:
+        st.session_state["show_api_message"] = None
+
     # Verificar se a chave foi carregada corretamente
     if api_key is None:
-        st.markdown("<p style='color:red; font-style:italic;'>Erro: Não podemos prosseguir com a execução do programa. A chave da API não foi encontrada. Verifique o arquivo .env. ou contate o administrador do sistema.</p>", unsafe_allow_html=True)
+        st.markdown("<p style='color:red; font-style:italic;'> :coffin: Erro: Não podemos prosseguir com a execução do programa. A chave da API não foi encontrada. Verifique o arquivo .env ou contate o administrador do sistema.</p>", unsafe_allow_html=True)
+        return
     else:
-        st.markdown("<p style='color:gray; font-style:italic;'>(API Key carregada com sucesso!)</p>", unsafe_allow_html=True)
+        # Mostra a mensagem de sucesso apenas se ainda não foi exibida
+        if st.session_state["show_api_message"] is None:
+            st.markdown("<p style='color:gray; font-style:italic;'>(API Key carregada com sucesso!)</p>", unsafe_allow_html=True)
+            st.session_state["show_api_message"] = True
+            # Aguarda 3 segundos e reexecuta para esconder a mensagem
+            time.sleep(3)
+            st.session_state["show_api_message"] = False
+            st.rerun()
 
-    st.markdown("Este é o Assistente 1 <br> A sua especialidade é ...",unsafe_allow_html=True)
+    st.markdown("Este é o Assistente 1 <br> Caso precise de recomendações, tenha dúvidas, ou queira apenas bater um papo sobre o universo do cinema. <br> Este é o lugar correto para isso", unsafe_allow_html=True)
 
-    # Inicializa o histórico de mensagens
+    # Sidebar indicando troca de páginas
+    with st.sidebar:
+        st.header("Menu")
+        if st.button("Página Inicial", key="nav_home"):
+            st.switch_page("main_page.py")
+        st.header("Assistentes")
+        if st.button("Assistente 1", key="nav_assist1"):
+            st.switch_page("pages/page1.py")
+        if st.button("Assistente 2", key="nav_assist2"):
+            st.switch_page("pages/page2.py")
+
+    # Inicializa o histórico de mensagens e controle de envio
     if "messages" not in st.session_state:
         st.session_state["messages"] = []
+    if "processing" not in st.session_state:
+        st.session_state["processing"] = False
 
     # Exibe o histórico de mensagens
     for message in st.session_state["messages"]:
@@ -43,31 +66,22 @@ def main():
             st.markdown(message["content"])
 
     # Caixa de texto para entrada do usuário
-    user_input = st.text_input("Bem-vindo ao Assistente da OpenAI!", key="user_input", value="")
+    user_input = st.text_input("Como posso ajudar?", key="user_input", value="")
 
     # Botão para enviar a mensagem
-    if st.button("Enviar"):
+    if st.button("Enviar :arrow_forward:", key="send_button") and not st.session_state["processing"]:
         if user_input:
-            # Adiciona a mensagem do usuário ao histórico
-            if not st.session_state["messages"] or st.session_state["messages"][-1]["content"] != user_input:
-                st.session_state["messages"].append({"role": "user", "content": user_input})
-
-            # Chama a função com o prompt e o histórico
+            st.session_state["processing"] = True
             response = get_chatgpt_response(user_input, st.session_state["messages"])
-
-            # Adiciona a resposta ao histórico apenas se não for igual à última
-            if not st.session_state["messages"] or st.session_state["messages"][-1]["content"] != response:
-                st.session_state["messages"].append({"role": "assistant", "content": response})
-            
-
-            # Atualiza a interface
+            st.session_state["processing"] = False
             st.rerun()
         else:
             st.warning("Por favor, digite uma mensagem antes de enviar.")
 
-    # Opcional: botão para limpar o histórico
-    if st.button("Limpar Histórico"):
+    # Botão para limpar o histórico
+    if st.button("Limpar Histórico :wastebasket:", key="clear_button"):
         st.session_state["messages"] = []
+        st.session_state["processing"] = False
         st.rerun()
 
 if __name__ == "__main__":

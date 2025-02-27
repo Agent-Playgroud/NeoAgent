@@ -96,19 +96,19 @@ def main():
             st.write("E-mail:", user_info["email"])
             st.write("Através da sidebar, selecione o assistente que deseja utilizar")
             # Verifica se o usuario esta cadastrado no banco de dados e o cadastra se nao estiver
-            if user_bd.localizar_usuario(user_info["email"]) == []:
-                try:
-                    user = user_bd.dados_user(user_info["given_name"], user_info["family_name"], user_info["email"])
-                    user.cadastrar_usuario()
-                except:
-                    try:
-                        user = user_bd.dados_user(user_info["given_name"],'NaN', user_info["email"])
-                        user.cadastrar_usuario()
-                    except:
-                        user = user_bd.dados_user(user_info["name"],'NaN', user_info["email"])
-                        user.cadastrar_usuario()
-            else:
-                pass
+            # if user_bd.localizar_usuario(user_info["email"]) == []:
+            #     try:
+            #         user = user_bd.dados_user(user_info["given_name"], user_info["family_name"], user_info["email"])
+            #         user.cadastrar_usuario()
+            #     except:
+            #         try:
+            #             user = user_bd.dados_user(user_info["given_name"],'NaN', user_info["email"])
+            #             user.cadastrar_usuario()
+            #         except:
+            #             user = user_bd.dados_user(user_info["name"],'NaN', user_info["email"])
+            #             user.cadastrar_usuario()
+            # else:
+            #     pass
             if st.button("Logout"):
                 st.session_state["credentials"] = None
                 st.session_state.pop("state", None)
