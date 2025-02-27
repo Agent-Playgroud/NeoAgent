@@ -9,14 +9,14 @@ try:
         "Server=MAQ-RR;"
         "Database=Agente_IA;"
         "Trusted_Connection=yes;"
-        "Timeout=600;"
+        "Timeout=480;"
     )
 
     conexao = pyodbc.connect(dados_conexao)
     print("Conexão com o banco de dados do usuário bem Sucedida")
     cursor = conexao.cursor()
 except Exception as e:
-    print(f"Erro ao conectar ao banco de dados do usuário: {e}")
+    print(f"Erro ao conectar ao banco de dados do usuario: {e}")
 
 #funções para o banco de dados do usuario
 
@@ -35,10 +35,6 @@ class dados_user:
         cursor.commit()
 
     
-def listar_usuarios():
-    comando = f"""SELECT * FROM DimUser"""
-    cursor.execute(comando)
-    return cursor.fetchall()
     
 def localizar_usuario(email):
     comando = f"""SELECT * FROM DimUser WHERE email_user = '{email}'"""
@@ -50,7 +46,12 @@ def deletar_usuario(email):
     cursor.execute(comando)
     cursor.commit()
 
-def atualizar_usuario(email, nome, sobrenome, senha):
-    comando = f"""UPDATE DimUser SET nome_user = '{nome}', sobrenome_user = '{sobrenome}', senha_user = '{senha}' WHERE email_user = '{email}'"""
+def identificar_usuario(email):
+    comando = f"""SELECT id_user FROM DimUser WHERE email_user = '{email}'"""
     cursor.execute(comando)
-    cursor.commit()
+    return cursor.fetchall()
+
+def identificar_agente(nome):
+    comando = f"""SELECT key_agent FROM DimAgent WHERE nome_agente = '{nome}'"""
+    cursor.execute(comando)
+    return cursor.fetchall()
