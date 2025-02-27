@@ -6,7 +6,9 @@ from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 import json
 import os
-import functions_bd
+import files_bd
+import user_bd
+import agent_bd
 
 # Configurações do Google OAuth
 SCOPES = ["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"]
@@ -93,17 +95,17 @@ def main():
             st.write("Bem-vindo(a),", user_info["name"])
             st.write("E-mail:", user_info["email"])
             st.write("Através da sidebar, selecione o assistente que deseja utilizar")
-            #verifica se o usuario esta cadastrado no banco de dados
-            if functions_bd.localizar_usuario(user_info["email"]) == []:
+            # Verifica se o usuario esta cadastrado no banco de dados e o cadastra se nao estiver
+            if user_bd.localizar_usuario(user_info["email"]) == []:
                 try:
-                    user = functions_bd.dados_user(user_info["given_name"], user_info["family_name"], user_info["email"])
+                    user = user_bd.dados_user(user_info["given_name"], user_info["family_name"], user_info["email"])
                     user.cadastrar_usuario()
                 except:
                     try:
-                        user = functions_bd.dados_user(user_info["given_name"],'NaN', user_info["email"])
+                        user = user_bd.dados_user(user_info["given_name"],'NaN', user_info["email"])
                         user.cadastrar_usuario()
                     except:
-                        user = functions_bd.dados_user(user_info["name"],'NaN', user_info["email"])
+                        user = user_bd.dados_user(user_info["name"],'NaN', user_info["email"])
                         user.cadastrar_usuario()
             else:
                 pass
