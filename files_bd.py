@@ -8,7 +8,7 @@ try:
         "Server=MAQ-RR;"
         "Database=Agente_IA;"
         "Trusted_Connection=yes;"
-        "Timeout=480;"
+        "Timeout=600;"
     )
 
     conexao = pyodbc.connect(dados_conexao)
