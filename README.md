@@ -7,7 +7,7 @@
  <a href="#Objetivo">Objetivo</a> •
  <a href="#Features">Features</a> • 
  <a href="#Pré-requisitos">Pré-Requisitos</a> • 
- <a href="#Rodando a aplicação">Rodando a aplicação</a> •
+ <a href="#🎲 Rodando a aplicação">Rodando a aplicação</a> •
  <a href="#tecnologias">Tecnologias</a> • 
  <a href="#Autores">Autores</a> • 
  <a href="#License">Licença</a> • 
@@ -33,7 +33,7 @@ Esta aplicação tem por objetivo proporcionar conversas interativas com agentes
 ### Pré-requisitos
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
-• Python na versão 3.5 
+• Python na versão 3.5 ou superior
 • SQL Server
 • Conta no Google
 
@@ -89,7 +89,7 @@ Thais
 
 João
 
-License
+### License
 
 Copyright (c) <2025> <Grupo 4 Desafio acelerado>
 
