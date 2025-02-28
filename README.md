@@ -4,10 +4,10 @@
 <p align="center">🚀 Aplicação para bate papo com agente de IA generativa</p>
 
 <p align="center">
- <a href="#objetivo">Objetivo</a> •
+ <a href="#Objetivo">Objetivo</a> •
  <a href="#Features">Features</a> • 
  <a href="#Pré-requisitos">Pré-Requisitos</a> • 
- <a href="#🎲 Rodando a aplicação">Rodando a aplicação</a> •
+ <a href="#Rodando a aplicação">Rodando a aplicação</a> •
  <a href="#tecnologias">Tecnologias</a> • 
  <a href="#Autores">Autores</a> • 
  <a href="#License">Licença</a> • 
@@ -18,7 +18,7 @@
 </h4>
 
 <h4 align="center">  
-	Objetivo
+	###Objetivo
 </h4>
 
 Esta aplicação tem por objetivo proporcionar conversas interativas com agentes de IA generativa de temas diferentes, indo de recomendações de filmes a adivinhações divertidas.
