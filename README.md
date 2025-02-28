@@ -17,9 +17,9 @@
 	🚧  Status >>> 🚀 Em construção...  🚧
 </h4>
 
-<h4 align="center">  
-	###Objetivo
-</h4>
+<h3 align="center">  
+	Objetivo
+</h3>
 
 Esta aplicação tem por objetivo proporcionar conversas interativas com agentes de IA generativa de temas diferentes, indo de recomendações de filmes a adivinhações divertidas.
 
