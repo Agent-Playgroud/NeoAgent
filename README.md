@@ -1,32 +1,40 @@
-<h1 align="center">Nome do Projeto</h1>
+<h1 align="center">Neo Agent </h1>
 
-<p align="center">🚀 lib para construir interfaces do usuário com componentes reutilizáveis</p>
+<p align="center">🚀 Aplicação para bate papo com agente de IA generativa</p>
 
 <p align="center">
  <a href="#objetivo">Objetivo</a> •
- <a href="#roadmap">Roadmap</a> • 
+ <a href="#Features">Features</a> • 
+ <a href="#Pré-Requisitos">Pré-Requisitos</a> • 
+ <a href="#Rodando o Back End (servidor)">Rodando o Back End (servidor) •
  <a href="#tecnologias">Tecnologias</a> • 
- <a href="#contribuicao">Contribuição</a> • 
- <a href="#licenc-a">Licença</a> • 
- <a href="#autor">Autor</a>
+ <a href="#Autores">Autores</a>
+ <a href="#License">Licença</a> • 
 </p>
 
 <h4 align="center"> 
-	🚧  React Select 🚀 Em construção...  🚧
+	🚧  Status >>> 🚀 Em construção...  🚧
 </h4>
+
+<h4 align="center">  
+	Objetivo
+</h4>
+
+Esta aplicação tem por objetivo proporcionar conversas interativas com agentes de IA generativa de temas diferentes, indo de recomendações de filmes a adivinhações divertidas.
 
 ### Features
 
-- [x] Cadastro de usuário
-- [x] Cadastro de cliente
-- [ ] Cadastro de produtos
+- [x] Login de usuário 
+- [x] Escolha de agente
+- [ ] Converse com seu agente
 
 
 ### Pré-requisitos
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
-[Git](https://git-scm.com), [Node.js](https://nodejs.org/en/). 
-Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/)
+• Python na versão 3.5 
+• SQL Server
+• Conta no Google
 
 ### 🎲 Rodando o Back End (servidor)
 
@@ -35,18 +43,15 @@ Além disto é bom ter um editor para trabalhar com o código como [VSCode](http
 $ git clone <https://github.com/tgmarinho/nlw1>
 
 # Acesse a pasta do projeto no terminal/cmd
-$ cd nlw1
+$ cd NeoAgent
 
-# Vá para a pasta server
-$ cd server
+# Ative o ambiente virtual da oasta do projeto
+$ .venv\Scripts\activate
 
-# Instale as dependências
-$ npm install
+# Execute a aplicação no cmd
+$ streamlit run main_page.py
 
-# Execute a aplicação em modo de desenvolvimento
-$ npm run dev:server
-
-# O servidor inciará na porta:3333 - acesse <http://localhost:3333>
+# O servidor inciará na porta:8501 - acesse <http://localhost:8501> ou espere seu navehgador padrão abri-lo
 ```
 
 
@@ -54,24 +59,27 @@ $ npm run dev:server
 
 As seguintes ferramentas foram usadas na construção do projeto:
 
-- [Expo](https://expo.io/)
-- [Node.js](https://nodejs.org/en/)
-- [React](https://pt-br.reactjs.org/)
-- [React Native](https://reactnative.dev/)
-- [TypeScript](https://www.typescriptlang.org/)
+•	Python → Linguagem principal para desenvolvimento.
+•	FastAPI → API para interação com o OpenAI e outras funções.
+•	SQL Server → Banco de dados para armazenar usuários, agentes e arquivos.
+•	Streamlit → Framework para criar a interface interativa do sistema.
+•	streamlit-authenticator → Gerenciamento de login via Google.
+•	OpenAI API → Utilizada para o processamento e resposta dos agentes.
+•	OAuth 2.0 (Google Login) → Autenticação via conta do Google.
+•	pyodbc → Biblioteca para interagir com SQL Server
+•	dotenv → Gerenciamento de variáveis de ambiente.
 
 
 ###  Autores
 
+Os autores desse criativo projeto são: 
+Raphael Ramalho
+Thais
+João
 
+License
 
-
-
-
-
-MIT License
-
-Copyright (c) <2020> <Seu Nome>
+Copyright (c) <2020> <Grupo 4 Desafio acelerado>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
