@@ -95,6 +95,16 @@ def main():
             st.write("Bem-vindo(a),", user_info["name"])
             st.write("E-mail:", user_info["email"])
             st.write("Através da sidebar, selecione o assistente que deseja utilizar")
+            # Sidebar indicando troca de páginas
+            with st.sidebar:
+                st.header("Menu")
+                if st.button("Página Inicial"):
+                    st.switch_page("main_page.py")
+                st.header("Assistentes")
+                if st.button("Assistente 1"):
+                    st.switch_page("pages/page1.py")
+                if st.button("Assistente 2"):
+                    st.switch_page("pages/page2.py")
             # Verifica se o usuario esta cadastrado no banco de dados e o cadastra se nao estiver
             # if user_bd.localizar_usuario(user_info["email"]) == []:
             #     try:
@@ -127,13 +137,3 @@ if __name__ == "__main__":
 #else:
 #    st.sidebar.write("Nenhuma imagem disponível.")
 
-# Sidebar indicando troca de páginas
-with st.sidebar:
-    st.header("Menu")
-    if st.button("Página Inicial"):
-        st.switch_page("main_page.py")
-    st.header("Assistentes")
-    if st.button("Assistente 1"):
-        st.switch_page("pages/page1.py")
-    if st.button("Assistente 2"):
-        st.switch_page("pages/page2.py")
