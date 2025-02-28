@@ -5,10 +5,10 @@
 <p align="center">
  <a href="#objetivo">Objetivo</a> •
  <a href="#Features">Features</a> • 
- <a href="#Pré-Requisitos">Pré-Requisitos</a> • 
- <a href="#Rodando o Back End (servidor)">Rodando o Back End (servidor) •
+ <a href="#Pré-requisitos">Pré-Requisitos</a> • 
+ <a href="#🎲 Rodando a aplicação">Rodando a aplicação</a> •
  <a href="#tecnologias">Tecnologias</a> • 
- <a href="#Autores">Autores</a>
+ <a href="#Autores">Autores</a> • 
  <a href="#License">Licença</a> • 
 </p>
 
@@ -36,11 +36,11 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
 • SQL Server
 • Conta no Google
 
-### 🎲 Rodando o Back End (servidor)
+### 🎲 Rodando a aplicação
 
 ```bash
 # Clone este repositório
-$ git clone <https://github.com/tgmarinho/nlw1>
+$ git clone <[https://github.com/Agent-Playgroud/NeoAgent]>
 
 # Acesse a pasta do projeto no terminal/cmd
 $ cd NeoAgent
@@ -60,26 +60,37 @@ $ streamlit run main_page.py
 As seguintes ferramentas foram usadas na construção do projeto:
 
 •	Python → Linguagem principal para desenvolvimento.
+
 •	FastAPI → API para interação com o OpenAI e outras funções.
+
 •	SQL Server → Banco de dados para armazenar usuários, agentes e arquivos.
+
 •	Streamlit → Framework para criar a interface interativa do sistema.
+
 •	streamlit-authenticator → Gerenciamento de login via Google.
+
 •	OpenAI API → Utilizada para o processamento e resposta dos agentes.
+
 •	OAuth 2.0 (Google Login) → Autenticação via conta do Google.
-•	pyodbc → Biblioteca para interagir com SQL Server
+
+•	pyodbc → Biblioteca para interagir com SQL Server.
+
 •	dotenv → Gerenciamento de variáveis de ambiente.
 
 
 ###  Autores
 
-Os autores desse criativo projeto são: 
+Os autores desse criativo projeto são:
+
 Raphael Ramalho
+
 Thais
+
 João
 
 License
 
-Copyright (c) <2020> <Grupo 4 Desafio acelerado>
+Copyright (c) <2025> <Grupo 4 Desafio acelerado>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
