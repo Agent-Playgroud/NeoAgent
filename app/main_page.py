@@ -6,7 +6,9 @@ from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 import json
 import os
-import functions_bd
+import files_bd
+import user_bd
+import agent_bd
 
 # Configurações do Google OAuth
 SCOPES = ["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"]
@@ -36,7 +38,7 @@ def authenticate():
         st.session_state["state"] = state
         st.markdown(
             f"""
-            <a href="{authorization_url}" target="_self">Clique aqui para fazer login com o Google</a>
+            <a href="{authorization_url}" target="_self">Para acessar é necessário fazer login com o Google. Clique aqui para ser redirecionado.</a>
             """,
             unsafe_allow_html=True
         )
@@ -80,7 +82,8 @@ def get_user_info(credentials):
 
 # Aplicação principal
 def main():
-    st.title("Autenticação com Google no Streamlit")
+    st.title("Neoagent")
+
 
     # Processa o callback primeiro
     process_callback()
@@ -91,22 +94,41 @@ def main():
         user_info = get_user_info(credentials)
         if user_info:
             st.write("Bem-vindo(a),", user_info["name"])
-            st.write("E-mail:", user_info["email"])
-            st.write("Através da sidebar, selecione o assistente que deseja utilizar")
+            st.write("Você está logado como:", user_info["email"])
+            st.write("Selecione abaixo o assistente que deseja consultar")
+
+            if "page" in st.session_state:
+                st.session_state.pop("page", None)  # Remove a navegação automática
+            
+            col1, col2, col3 = st.columns(3)
+            
+            # Botões indicando troca de páginas
+            with col1:
+                if st.button("Hitchcock :movie_camera:"):
+                    st.switch_page("pages/page1.py")
+                
+            with col2:
+                if st.button("JobGuru :male_mage:"):
+                    st.switch_page("pages/page2.py")
+
+            with col3:
+                if st.button("Socratix :thinking_face:"):
+                    st.switch_page("pages/page3.py")
+            
             #verifica se o usuario esta cadastrado no banco de dados
-            if functions_bd.localizar_usuario(user_info["email"]) == []:
-                try:
-                    user = functions_bd.dados_user(user_info["given_name"], user_info["family_name"], user_info["email"])
-                    user.cadastrar_usuario()
-                except:
-                    try:
-                        user = functions_bd.dados_user(user_info["given_name"],'NaN', user_info["email"])
-                        user.cadastrar_usuario()
-                    except:
-                        user = functions_bd.dados_user(user_info["name"],'NaN', user_info["email"])
-                        user.cadastrar_usuario()
-            else:
-                pass
+            # if functions_bd.localizar_usuario(user_info["email"]) == []:
+            #     try:
+            #         user = functions_bd.dados_user(user_info["given_name"], user_info["family_name"], user_info["email"])
+            #         user.cadastrar_usuario()
+            #     except:
+            #         try:
+            #             user = functions_bd.dados_user(user_info["given_name"],'NaN', user_info["email"])
+            #             user.cadastrar_usuario()
+            #         except:
+            #             user = functions_bd.dados_user(user_info["name"],'NaN', user_info["email"])
+            #             user.cadastrar_usuario()
+            # else:
+            #     pass
             if st.button("Logout"):
                 st.session_state["credentials"] = None
                 st.session_state.pop("state", None)
@@ -119,19 +141,3 @@ def main():
 if __name__ == "__main__":
     main()
 
-# Exibir a imagem na sidebar
-#if image_url:
-#    st.sidebar.image(image_url, caption='Foto de Perfil', use_columns_width=True)
-#else:
-#    st.sidebar.write("Nenhuma imagem disponível.")
-
-# Sidebar indicando troca de páginas
-with st.sidebar:
-    st.header("Menu")
-    if st.button("Página Inicial"):
-        st.switch_page("main_page.py")
-    st.header("Assistentes")
-    if st.button("Assistente 1"):
-        st.switch_page("pages/page1.py")
-    if st.button("Assistente 2"):
-        st.switch_page("pages/page2.py")
