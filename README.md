@@ -8,7 +8,7 @@
  <a href="#Features">Features</a> • 
  <a href="#Pré-requisitos">Pré-Requisitos</a> • 
  <a href="#🎲 Rodando a aplicação">Rodando a aplicação</a> •
- <a href="#Tecnologias">Tecnologias</a> • 
+ <a href="#🛠 Tecnologias">Tecnologias</a> • 
  <a href="#Autores">Autores</a> • 
  <a href="#License">Licença</a> • 
 </p>
