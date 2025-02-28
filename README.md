@@ -33,8 +33,11 @@ Esta aplicação tem por objetivo proporcionar conversas interativas com agentes
 ### Pré-requisitos
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
+
 • Python na versão 3.5 ou superior
+
 • SQL Server
+
 • Conta no Google
 
 ### 🎲 Rodando a aplicação
